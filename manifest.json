@@ -1,0 +1,16 @@
+{
+    "name": "Color Picker",
+    "version": "0.1.0",
+    "description": "Digital color picker",
+    "permissions": ["storage", "tabs"],
+    "action": {
+      "default_icon": {
+        "16": "assets/logo.png",
+        "24": "assets/logo.png",
+        "32": "assets/logo.png"
+      },
+      "default_title": "Color Picker",
+      "default_popup": "popup.html"
+    },
+    "manifest_version": 3
+}
