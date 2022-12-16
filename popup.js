@@ -19,9 +19,14 @@ function addRow(clr){
 
     const savedColElement = document.createElement("div");
 
-    savedColElement.textContent = String(clr);
-    savedColElement.style.background = clr;
-    // savedColElement.style.color = clr;
+    const savedColor = document.createElement("div");
+    const savedColText = document.createElement("p");
+
+    savedColor.style.background = clr;
+    savedColText.textContent = String(clr);
+    
+    savedColElement.appendChild(savedColor);
+    savedColElement.appendChild(savedColText);
 
     savedColors.appendChild(savedColElement);
 

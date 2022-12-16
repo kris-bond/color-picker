@@ -4,9 +4,6 @@
     "description": "Digital color picker",
     "author": "Kris Bond",
     "permissions": ["storage", "tabs", "activeTab", "declartiveContent"],
-    "background": {
-      "scripts": ["background.js"]
-    },
     "content_scripts":[
       {
         "matches": ["<all_urls>"],
