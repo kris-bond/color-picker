@@ -21,13 +21,29 @@ function addRow(clr){
 
     const savedColor = document.createElement("div");
     const savedColText = document.createElement("p");
+    const copyBtn = document.createElement("button");
 
     savedColor.style.background = clr;
     savedColText.textContent = String(clr);
+
+    //copy button
+    copyBtn.textContent = "copy to clipboard";
+    copyBtn.onclick = copyToClip();
     
     savedColElement.appendChild(savedColor);
     savedColElement.appendChild(savedColText);
+    savedColElement.appendChild(copyBtn);
 
     savedColors.appendChild(savedColElement);
 
 }
+
+function copyToClip(){
+
+}
+
+//TODO
+//Add box with sample of colour
+//button to remove all saved colours
+//Button to copy value of colour
+//Save colour list when closed/ reopened
