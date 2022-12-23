@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {});
 
 document.getElementById("select-col-btn").addEventListener("click", drop);
 
+document.getElementById("clear-btn").addEventListener("click", clear);
+
 const savedColors = document.querySelector(".saved-colors");
 
 async function drop({ target: {style}}) {
@@ -40,6 +42,10 @@ function addRow(clr){
 
 function copyToClip(){
 
+}
+
+function clear(){
+    savedColors.innerHTML = '';
 }
 
 //TODO
