@@ -25,7 +25,11 @@ function addRow(clr){
     const savedColText = document.createElement("p");
     const copyBtn = document.createElement("button");
 
+    savedColor.style.width = '5px';
+    savedColor.style.height = '5px';
+    savedColor.style.padding = '5px';
     savedColor.style.background = clr;
+
     savedColText.textContent = String(clr);
 
     //copy button
