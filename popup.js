@@ -29,12 +29,13 @@ function addRow(clr){
     savedColor.style.height = '5px';
     savedColor.style.padding = '5px';
     savedColor.style.background = clr;
+    savedColor.style.border = "thin solid black";
 
     savedColText.textContent = String(clr);
 
     //copy button
     copyBtn.textContent = "copy to clipboard";
-    copyBtn.onclick = copyToClip();
+    copyBtn.onclick = copyToClip(savedColText.textContent);
     
     savedColElement.appendChild(savedColor);
     savedColElement.appendChild(savedColText);
@@ -44,8 +45,8 @@ function addRow(clr){
 
 }
 
-function copyToClip(){
-
+function copyToClip(clr){
+    navigator.clipboard.writeText(clr);
 }
 
 function clear(){
@@ -53,7 +54,9 @@ function clear(){
 }
 
 //TODO
-//Add box with sample of colour
-//button to remove all saved colours
-//Button to copy value of colour
-//Save colour list when closed/ reopened
+//Save colour list when closed/ reopened - https://stackoverflow.com/questions/59366177/good-idea-to-keep-persistent-true-in-chrome-extension-manifest-for-timer-feature
+//layout
+//UX improvements 
+//- feedback when copied to clipboard
+//- individual items can be deleted
+//- ability to get other value types (RGB etc)
