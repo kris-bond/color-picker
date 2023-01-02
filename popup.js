@@ -20,6 +20,7 @@ async function drop({ target: {style}}) {
 function addRow(clr){
 
     const savedColElement = document.createElement("div");
+    savedColElement.className = "saved-col-div";
 
     const savedColor = document.createElement("div");
     const savedColText = document.createElement("p");

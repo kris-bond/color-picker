@@ -8,3 +8,11 @@
   font-weight: bold;
   padding: 8px;
 }
+
+.saved-col-div {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  justify-content: flex-start;
+  align-items: center;
+}
