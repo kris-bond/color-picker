@@ -35,7 +35,8 @@ function addRow(clr){
     savedColText.textContent = String(clr);
 
     //copy button
-    copyBtn.textContent = "copy to clipboard";
+    copyBtn.className = "copy-btn";
+    copyBtn.textContent = "📋";
     copyBtn.onclick = copyToClip(savedColText.textContent);
     
     savedColElement.appendChild(savedColor);
