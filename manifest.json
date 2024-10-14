@@ -3,13 +3,7 @@
   "version": "0.1.0",
   "description": "Digital color picker",
   "author": "Kris Bond",
-  "permissions": ["storage", "tabs", "activeTab"],
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["popup.js"]
-    }
-  ],
+  "permissions": ["storage", "clipboardWrite"],
   "action": {
     "default_icon": {
       "16": "assets/logo.png",
