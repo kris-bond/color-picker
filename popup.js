@@ -1,64 +1,86 @@
-const dropper = new EyeDropper();
+document.addEventListener('DOMContentLoaded', () => {
+  const dropper = new EyeDropper();
+  const savedColors = document.querySelector('.saved-colors');
 
-document.addEventListener("DOMContentLoaded", () => {});
+  if (!savedColors) {
+    console.error('Element with class .saved-colors not found!');
+    return; // Stop execution if the element is not found
+  }
 
-document.getElementById("select-col-btn").addEventListener("click", drop);
+  // Load saved colors from storage
+  chrome.storage.local.get({ colors: [] }, function (result) {
+    savedColors.innerHTML = ''; // Clear previous colors
 
-document.getElementById("clear-btn").addEventListener("click", clear);
+    if (result.colors.length) {
+      result.colors.forEach(addRow);
+    }
+  });
 
-const savedColors = document.querySelector(".saved-colors");
+  // Add event listeners
+  const selectColBtn = document.getElementById('select-col-btn');
+  const clearBtn = document.getElementById('clear-btn');
 
-async function drop({ target: {style}}) {
+  if (selectColBtn && clearBtn) {
+    selectColBtn.addEventListener('click', drop);
+    clearBtn.addEventListener('click', clear);
+  }
+
+  async function drop() {
     const color = await dropper.open().catch();
+    if (color) {
+      addRow(color.sRGBHex);
+    }
+  }
 
-    // style.background = color.sRGBHex;
+  function addRow(clr) {
+    // Check if the color is already displayed
+    const existingColors = Array.from(savedColors.children);
+    const alreadyExists = existingColors.some((element) => {
+      const colorText = element.querySelector('p').textContent;
+      return colorText === clr; // Check if the color is already present
+    });
 
-    addRow(color.sRGBHex);
+    if (!alreadyExists) {
+      // Only add the color if it doesn't exist
+      const savedColElement = document.createElement('div');
+      savedColElement.className = 'saved-col-div';
 
-}
+      const savedColor = document.createElement('div');
+      const savedColText = document.createElement('p');
+      const copyBtn = document.createElement('button');
 
-function addRow(clr){
+      savedColor.style.width = '5px';
+      savedColor.style.height = '5px';
+      savedColor.style.padding = '5px';
+      savedColor.style.background = clr;
+      savedColor.style.border = 'thin solid black';
 
-    const savedColElement = document.createElement("div");
-    savedColElement.className = "saved-col-div";
+      savedColText.textContent = String(clr);
 
-    const savedColor = document.createElement("div");
-    const savedColText = document.createElement("p");
-    const copyBtn = document.createElement("button");
+      copyBtn.className = 'copy-btn';
+      copyBtn.textContent = '📋';
+      copyBtn.onclick = () => copyToClip(savedColText.textContent);
 
-    savedColor.style.width = '5px';
-    savedColor.style.height = '5px';
-    savedColor.style.padding = '5px';
-    savedColor.style.background = clr;
-    savedColor.style.border = "thin solid black";
+      savedColElement.appendChild(savedColor);
+      savedColElement.appendChild(savedColText);
+      savedColElement.appendChild(copyBtn);
 
-    savedColText.textContent = String(clr);
+      savedColors.appendChild(savedColElement);
 
-    //copy button
-    copyBtn.className = "copy-btn";
-    copyBtn.textContent = "📋";
-    copyBtn.onclick = copyToClip(savedColText.textContent);
-    
-    savedColElement.appendChild(savedColor);
-    savedColElement.appendChild(savedColText);
-    savedColElement.appendChild(copyBtn);
+      // Save color to storage
+      chrome.storage.local.get({ colors: [] }, function (result) {
+        const updatedColors = [...result.colors, clr];
+        chrome.storage.local.set({ colors: updatedColors });
+      });
+    }
+  }
 
-    savedColors.appendChild(savedColElement);
-
-}
-
-function copyToClip(clr){
+  function copyToClip(clr) {
     navigator.clipboard.writeText(clr);
-}
+  }
 
-function clear(){
+  function clear() {
     savedColors.innerHTML = '';
-}
-
-//TODO
-//Save colour list when closed/ reopened - https://stackoverflow.com/questions/59366177/good-idea-to-keep-persistent-true-in-chrome-extension-manifest-for-timer-feature
-//layout
-//UX improvements 
-//- feedback when copied to clipboard
-//- individual items can be deleted
-//- ability to get other value types (RGB etc)
+    chrome.storage.local.set({ colors: [] });
+  }
+});

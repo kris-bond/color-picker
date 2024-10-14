@@ -1,23 +1,23 @@
 {
-    "name": "Color Picker",
-    "version": "0.1.0",
-    "description": "Digital color picker",
-    "author": "Kris Bond",
-    "permissions": ["storage", "tabs", "activeTab", "declartiveContent"],
-    "content_scripts":[
-      {
-        "matches": ["<all_urls>"],
-        "js": ["finder.js"]
-      }
-    ],
-    "action": {
-      "default_icon": {
-        "16": "assets/logo.png",
-        "24": "assets/logo.png",
-        "32": "assets/logo.png"
-      },
-      "default_title": "Color Picker",
-      "default_popup": "popup.html"
+  "name": "Color Picker",
+  "version": "0.1.0",
+  "description": "Digital color picker",
+  "author": "Kris Bond",
+  "permissions": ["storage", "tabs", "activeTab"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["popup.js"]
+    }
+  ],
+  "action": {
+    "default_icon": {
+      "16": "assets/logo.png",
+      "24": "assets/logo.png",
+      "32": "assets/logo.png"
     },
-    "manifest_version": 3
+    "default_title": "Color Picker",
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 3
 }

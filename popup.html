@@ -1,16 +1,24 @@
-<link href="popup.css" rel="stylesheet" type="text/css" />
-<script type="module" src="popup.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Picker</title>
+    <link href="popup.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="title">Color Picker</div>
 
-<div class="container">
-  
-    <div class="title">Color Picker</div>
+      <div>
+        <button id="select-col-btn">Find Color</button>
 
-    <div>
-      <button id="select-col-btn">Find Color</button>
+        <button id="clear-btn">Clear Colors</button>
 
-      <button id="clear-btn">Clear Colors</button>
-
-      <div class="saved-colors"></div>
+        <div class="saved-colors"></div>
+      </div>
     </div>
-  
-</div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
